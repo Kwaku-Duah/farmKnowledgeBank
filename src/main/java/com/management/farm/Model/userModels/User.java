@@ -1,5 +1,7 @@
 package com.management.farm.Model.userModels;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +22,8 @@ public class User {
     @Column(unique = true)
     private String phoneNumber;
 
+    // perfect to avoid seriliazing the password when converting user object to json
+    @JsonIgnore
     private String password;
     
 }
