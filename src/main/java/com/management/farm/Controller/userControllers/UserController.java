@@ -2,14 +2,18 @@ package com.management.farm.Controller.userControllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.management.farm.DTO.userDTOs.UserDto;
+import com.management.farm.Exception.UserExceptions.EmailAlreadyInUseException;
 import com.management.farm.Model.userModels.User;
 import com.management.farm.Service.userServices.UserService;
+
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -25,6 +29,11 @@ public class UserController {
     public ResponseEntity<User> registerUser(@RequestBody UserDto userDto){
         User registeredUser = userService.registerUser(userDto);
         return ResponseEntity.ok(registeredUser);
+    }
+
+     @ExceptionHandler(EmailAlreadyInUseException.class)
+    public ResponseEntity<String> handleEmailAlreadyInUseException(EmailAlreadyInUseException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
     }
     
 }

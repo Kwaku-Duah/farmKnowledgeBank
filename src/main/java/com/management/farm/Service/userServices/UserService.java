@@ -4,6 +4,7 @@ package com.management.farm.Service.userServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.management.farm.Exception.UserExceptions.EmailAlreadyInUseException;
 
 import com.management.farm.DTO.userDTOs.UserDto;
 import com.management.farm.Model.userModels.User;
@@ -20,6 +21,11 @@ public class UserService {
 
 
     public User registerUser(UserDto userDto){
+        if (userRepository.existsByEmail(userDto.getEmail())){
+            throw new EmailAlreadyInUseException("Email already in use!");
+        }
+
+
         User user = new User();
 
         user.setId(userDto.getId());

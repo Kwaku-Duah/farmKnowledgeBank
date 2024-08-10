@@ -19,7 +19,6 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @Column(unique = true)
     private String phoneNumber;
 
     // perfect to avoid seriliazing the password when converting user object to json
