@@ -1,4 +1,4 @@
-package com.management.farm.Security;
+package com.management.farm.Config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

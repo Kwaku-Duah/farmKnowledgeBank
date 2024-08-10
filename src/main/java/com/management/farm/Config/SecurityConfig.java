@@ -1,4 +1,4 @@
-package com.management.farm.Security;
+package com.management.farm.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,8 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
             .authorizeHttpRequests(requests -> requests
-                .requestMatchers("/api/users/**").permitAll()  
+                .requestMatchers("/api/users/**").permitAll()
+                // .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()); 
 
         return http.build();

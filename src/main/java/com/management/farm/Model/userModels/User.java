@@ -1,5 +1,9 @@
 package com.management.farm.Model.userModels;
 
+
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
@@ -24,5 +28,26 @@ public class User {
     // perfect to avoid seriliazing the password when converting user object to json
     @JsonIgnore
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "user_roles",
+        joinColumns =   @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+
+    )
+
+    private Set<Role> roles;
+
+        @JsonGetter("roles")
+    public String getRolesAsString() {
+        // Return a single string of roles, assuming one role per user
+        return roles.stream()
+                     .map(Role::getRole)
+                     .findFirst()
+                     .orElse("No Role");
+    }
+
+    
     
 }
