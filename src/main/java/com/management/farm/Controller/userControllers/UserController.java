@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.management.farm.DTO.userDTOs.LoginDto;
 import com.management.farm.DTO.userDTOs.UserDto;
 import com.management.farm.Exception.UserExceptions.EmailAlreadyInUseException;
 import com.management.farm.Model.userModels.User;
@@ -31,7 +32,19 @@ public class UserController {
         return ResponseEntity.ok(registeredUser);
     }
 
-     @ExceptionHandler(EmailAlreadyInUseException.class)
+    @PostMapping("/login")
+    public ResponseEntity<User> loginUser(@RequestBody LoginDto loginDto){
+        try {
+
+            User loggedInUser = userService.loginUser(loginDto.getEmail(), loginDto.getPassword());
+            return ResponseEntity.ok(loggedInUser);
+        } catch (Exception e) {
+            return ResponseEntity.status(401).body(null);
+        }
+    }
+    
+
+    @ExceptionHandler(EmailAlreadyInUseException.class)
     public ResponseEntity<String> handleEmailAlreadyInUseException(EmailAlreadyInUseException e) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
     }

@@ -1,6 +1,8 @@
 package com.management.farm.Service.userServices;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,6 +37,22 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
         return userRepository.save(user);
+    }
+    
+
+    public User loginUser(String email, String password) throws Exception {
+        Optional<User> userOpt = userRepository.findByEmail(email);
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                return user;
+            } else {
+                throw new Exception("Invalid credentials");
+            } 
+            
+        } else {
+            throw new Exception("User not found");
+        }
     }
 
 }
