@@ -40,14 +40,13 @@ public class User {
     private Set<Role> roles;
 
         @JsonGetter("roles")
-    public String getRolesAsString() {
+    public String getRole() {
         // Return a single string of roles, assuming one role per user
         return roles.stream()
                      .map(Role::getRole)
                      .findFirst()
                      .orElse("No Role");
     }
-
     
     
 }

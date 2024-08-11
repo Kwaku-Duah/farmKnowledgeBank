@@ -1,6 +1,5 @@
 package com.management.farm.DTO.userDTOs;
 import jakarta.validation.constraints.*;
-import java.util.Set;
 
 import lombok.*;
 
@@ -16,5 +15,5 @@ public class UserDto {
 
     private String phoneNumber;
     private String password;
-    private Set<String> roles;
+   
 }
