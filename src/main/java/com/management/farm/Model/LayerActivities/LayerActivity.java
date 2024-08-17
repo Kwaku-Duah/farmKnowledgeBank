@@ -12,6 +12,8 @@ public class LayerActivity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)  
     private LocalDate date;
     private String medication;
     private String temperatureCondition;
@@ -19,7 +21,7 @@ public class LayerActivity {
     private String water;
     private double weight;
     private String season;
-    private String comments;
+    private String dailyComments;
 
    
 }

@@ -8,4 +8,6 @@ import com.management.farm.Model.LayerActivities.LayerActivity;
 
 public interface LayerRepository extends JpaRepository<LayerActivity, Long> {
     List<LayerActivity> findByDate(LocalDate date);
+
+    List<LayerActivity> findByDateBetween(LocalDate startDate, LocalDate endDate);
 }

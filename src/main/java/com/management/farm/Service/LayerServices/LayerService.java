@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 import com.management.farm.Model.LayerActivities.LayerActivity;
 import com.management.farm.Repository.LayerRepositories.LayerRepository;
 
+
 @Service
 public class LayerService {
     @Autowired
     private LayerRepository layerRepository;
 
+   
     // create daily activity
     public LayerActivity createDailyActivity(LayerActivity activity) {
         return layerRepository.save(activity);
@@ -22,4 +24,5 @@ public class LayerService {
     public List<LayerActivity> getActivityByDate() {
         return layerRepository.findAll();
     }
+
 }
