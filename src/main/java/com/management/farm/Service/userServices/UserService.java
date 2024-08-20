@@ -67,6 +67,7 @@ public class UserService {
                 response.put("phoneNumber", user.getPhoneNumber());
                 response.put("roles", user.getRoles().iterator().next().getRole());
                 response.put("token", token);
+                response.put("expirationTime", jwtUtil.getJwtExpirationInMs());
 
                 return response;
                 
